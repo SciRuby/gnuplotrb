@@ -6,7 +6,7 @@ require 'rubocop/rake_task'
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb'].uniq
-  spec.rspec_opts = '--format documentation'
+  spec.rspec_opts = '--format documentation --color'
 end
 
 YARD::Rake::YardocTask.new(:doc) do |t|
