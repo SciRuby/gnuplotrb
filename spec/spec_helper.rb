@@ -3,10 +3,10 @@ require 'codeclimate-test-reporter'
 require 'digest'
 require 'chunky_png'
 require 'digest/md5'
-SimpleCov.add_filter 'vendor'
-SimpleCov.add_filter 'examples'
-SimpleCov.formatter = CodeClimate::TestReporter::Formatter
-SimpleCov.start CodeClimate::TestReporter.configuration.profile
+
+SimpleCov.start do
+  add_filter 'examples'
+end
 
 require 'gnuplotrb'
 
