@@ -3,7 +3,9 @@ require 'digest'
 require 'chunky_png'
 require 'digest/md5'
 
-SimpleCov.start
+SimpleCov.start do
+  add_filter 'examples'
+end
 
 require 'gnuplotrb'
 

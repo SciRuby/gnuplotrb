@@ -65,7 +65,7 @@ module GnuplotRB
     # @return [true] for existing methods and
     #   #to_|term_name| when name is a valid terminal type.
     # @return [false] otherwise
-    def respond_to?(meth_id)
+    def respond_to?(meth_id, include_all=false)
       # Next line is here to force iRuby use #to_iruby
       # instead of #to_svg.
       return super if defined? IRuby

@@ -11,7 +11,6 @@ rvm:
   - ruby-2.2.4
   - ruby-2.2.2
   - ruby-2.3.0-preview2
-  - jruby-head
 matrix:
   exclude:
     - os: linux
@@ -24,8 +23,12 @@ matrix:
       rvm: ruby-2.0.0-p648
     - os: osx
       rvm: ruby-2.3.0-preview2
-env:
-  - JRUBY_OPTS="-Xcli.debug=true --debug"
+  include:
+    - rvm: jruby-head
+      env: JRUBY_OPTS="-Xcli.debug=true --debug"
+addons:
+  code_climate:
+    repo_token: 60d9731d654527cb53aabc7db15bcde87d701ddb6b1cba8fc0da6aba16d00bb1
 before_install:
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu vivid main universe" ; fi
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo apt-get update -q ; fi
@@ -41,4 +44,5 @@ install:
   - bundle exec rake install
 script:
   - bundle exec rake spec
-  - CODECLIMATE_REPO_TOKEN=60d9731d654527cb53aabc7db15bcde87d701ddb6b1cba8fc0da6aba16d00bb1 bundle exec codeclimate-test-reporter
+after_success:
+  - bundle exec codeclimate-test-reporter
