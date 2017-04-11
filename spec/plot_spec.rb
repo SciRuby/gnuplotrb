@@ -16,11 +16,6 @@ describe Plot do
       @title = 'Awesome spec'
       @formula =  %w(sin(x) cos(x) exp(-x))
       @options = { title: @title, term: 'dumb' }
-      @df = Daru::DataFrame.new(
-        Build: [312, 630, 315, 312],
-        Test: [525, 1050, 701, 514],
-        Deploy: [215, 441, 370, 220]
-      )
     end
 
     it 'should be created out of sequence of datasets' do
@@ -38,10 +33,38 @@ describe Plot do
       expect(plot.title).to eql(@title)
     end
 
-    it 'should be created out of Daru::DataFrame' do
-      p = Plot.new(@df)
-      expect(p).to be_an_instance_of(Plot)
-      expect(p.datasets.size).to be_eql(3)
+    context 'creation out of Daru::DataFrame' do
+      let(:df) do
+        Daru::DataFrame.new(
+          {
+            Build: [312, 630, 315, 312],
+            Test: [525, 1050, 701, 514],
+            Deploy: [215, 441, 370, 220]
+          },
+          index: [0, 1, 2, 3],
+          name: 'Dummy DataFrame'
+        )
+      end
+
+      subject { Plot.new(df) }
+
+      it { is_expected.to be_an_instance_of Plot }
+
+      it 'creates datasets for each column except index' do
+        expect(subject.datasets.size).to be 3
+      end
+
+      it 'takes name for plot from DataFrame' do
+        expect(subject.title).to eql(df.name)
+      end
+
+      context 'with title option given' do
+        subject { Plot.new(df, title: 'Not a DataFrame') }
+
+        it "uses title option instead of DataFrame name" do
+          expect(subject.title).not_to eql(df.name)
+        end
+      end
     end
   end
 

@@ -284,6 +284,7 @@ module GnuplotRB
       when Hamster::Vector
         datasets[0]
       when (defined?(Daru) ? Daru::DataFrame : nil)
+        set_name_from_daru_dataframe(datasets[0])
         Hamster::Vector.new(datasets[0].map { |ds| dataset_from_any(ds) })
       else
         Hamster::Vector.new(datasets.map { |ds| dataset_from_any(ds) })
@@ -294,6 +295,10 @@ module GnuplotRB
     # Creates new Plot with existing data and given options.
     def new_with_options(options)
       self.class.new(@datasets, options)
+    end
+
+    def set_name_from_daru_dataframe(dataframe)
+      self.title = dataframe.name unless title
     end
   end
 end

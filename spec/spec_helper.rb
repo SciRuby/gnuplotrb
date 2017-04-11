@@ -1,5 +1,4 @@
 require 'simplecov'
-require 'codeclimate-test-reporter'
 require 'digest'
 require 'chunky_png'
 require 'digest/md5'
