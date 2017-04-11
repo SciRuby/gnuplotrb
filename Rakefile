@@ -10,7 +10,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
 end
 
 YARD::Rake::YardocTask.new(:doc) do |t|
-  t.files   = %w(README.rdoc lib)   # optional
+  t.files   = %w(README.md lib)   # optional
 end
 
 RuboCop::RakeTask.new(:cop)
