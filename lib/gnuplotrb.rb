@@ -19,6 +19,8 @@ require_if_available('daru')
 require 'gnuplotrb/external_classes/string'
 require 'gnuplotrb/external_classes/array'
 require 'gnuplotrb/external_classes/daru'
+require 'gnuplotrb/external_classes/dir'
+
 
 require 'gnuplotrb/version'
 require 'gnuplotrb/staff/settings'

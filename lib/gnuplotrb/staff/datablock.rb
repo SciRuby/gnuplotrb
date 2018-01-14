@@ -13,7 +13,7 @@ module GnuplotRB
       @stored_in_file = stored_in_file
       data_str = data.to_gnuplot_points
       if @stored_in_file
-        @file_name = Dir::Tmpname.make_tmpname('tmp_data', 0)
+        @file_name = Dir.gnuplot_tmpname('tmp_data')
         File.write(@file_name, data_str)
         name = File.join(Dir.pwd, @file_name)
         ObjectSpace.define_finalizer(self, proc { File.delete(name) })
