@@ -58,7 +58,7 @@ module GnuplotRB
         plot_opts.merge(term: ['gif', anim_opts])
       end.to_h
       need_output = plot_options[:output].nil?
-      plot_options[:output] = Dir::Tmpname.make_tmpname('anim', 0) if need_output
+      plot_options[:output] = Dir.gnuplot_tmpname('anim') if need_output
       terminal = Terminal.new
       multiplot(terminal, plot_options)
       # guaranteed wait for plotting to finish

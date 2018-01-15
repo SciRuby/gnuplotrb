@@ -110,7 +110,7 @@ module GnuplotRB
       if path
         result = plot(term: [terminal, options], output: path)
       else
-        path = Dir::Tmpname.make_tmpname(terminal, 0)
+        path = Dir.gnuplot_tmpname(terminal)
         plot(term: [terminal, options], output: path)
         result = File.binread(path)
         File.delete(path)
