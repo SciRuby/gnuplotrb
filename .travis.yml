@@ -3,41 +3,19 @@ notifications:
 language: ruby
 sudo: required
 os:
-  - linux
   - osx
 rvm:
-  - ruby-2.0.0-p648
-  - ruby-2.0.0-p598
-  - ruby-2.2.4
   - ruby-2.2.2
-  - ruby-2.3.0-preview2
-matrix:
-  exclude:
-    - os: linux
-      rvm: ruby-2.0.0-p598
-    - os: linux
-      rvm: ruby-2.2.2
-    - os: osx
-      rvm: ruby-2.2.4
-    - os: osx
-      rvm: ruby-2.0.0-p648
-    - os: osx
-      rvm: ruby-2.3.0-preview2
-  include:
-    - rvm: jruby-head
-      env: JRUBY_OPTS="-Xcli.debug=true --debug"
+  - ruby-2.3.0
+  - ruby-2.5.0
 addons:
   code_climate:
     repo_token: 60d9731d654527cb53aabc7db15bcde87d701ddb6b1cba8fc0da6aba16d00bb1
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu vivid main universe" ; fi
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo apt-get update -q ; fi
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo rm -rf /etc/dpkg/dpkg.cfg.d/multiarch ; fi
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo apt-get install gnuplot5 ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install pdflib-lite ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gnuplot --with-png --with-jpeg --with-cairo --with-svg ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ulimit -S -n 4096 ; fi
+  - brew update
+  - brew install pdflib-lite
+  - brew install gnuplot --with-png --with-jpeg --with-cairo --with-svg
+  - ulimit -S -n 4096
   - gem update bundler
   - bundle install
 install:
