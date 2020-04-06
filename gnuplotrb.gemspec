@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Ruby bindings for gnuplot'
   spec.description   = 'Renewed ruby bindings for gnuplot. Started at GSoC 2015.'
-  spec.homepage      = 'https://github.com/dilcom/gnuplotrb'
+  spec.homepage      = 'https://github.com/SciRuby/gnuplotrb'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 2.0'
 
